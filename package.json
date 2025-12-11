@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node server.js"
   },
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
     "better-sqlite3": "^8.1.0",
     "bcryptjs": "^2.4.3",
