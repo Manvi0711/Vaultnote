@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Shared Messages</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: Arial, sans-serif; max-width:800px; margin:20px auto; padding:10px; }
+    .message { border:1px solid #ddd; padding:8px; margin:8px 0; border-radius:6px; }
+    .small { font-size:0.9em; color:#555; }
+  </style>
+</head>
+<body>
+  <h1>Shared Messages</h1>
+  <div id="status" class="small">Loading...</div>
+  <div id="messages"></div>
+
+  <script>
+    async function loadShared() {
+      const token = location.pathname.split('/').pop();
+      try {
+        const res = await fetch('/api/share/' + token + '/messages');
+        if (!res.ok) {
+          const err = await res.text();
+          document.getElementById('status').textContent = 'Error: ' + err;
+          return;
+        }
+        const data = await res.json();
+        document.getElementById('status').textContent = 'Expires: ' + new Date(data.expires_at*1000).toLocaleString();
+        const list = document.getElementById('messages');
+        list.innerHTML = '';
+        if (!data.messages || data.messages.length === 0) {
+          list.innerHTML = '<div class="small">No messages found.</div>';
+          return;
+        }
+        data.messages.forEach(m => {
+          const d = document.createElement('div');
+          d.className = 'message';
+          d.innerHTML = `<div class="small">Created: ${new Date(m.created_at*1000).toLocaleString()}</div>
+                         <div style="white-space:pre-wrap; margin-top:6px;">${escapeHtml(m.content)}</div>`;
+          list.appendChild(d);
+        });
+      } catch (e) {
+        document.getElementById('status').textContent = 'Error loading messages';
+      }
+    }
+    function escapeHtml(s) {
+      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+    loadShared();
+  </script>
+</body>
+</html>

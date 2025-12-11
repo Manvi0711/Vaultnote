@@ -1,0 +1,20 @@
+{
+  "name": "secret-folders",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "start": "node server.js" {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^12.5.0",
+    "body-parser": "^2.2.1",
+    "express": "^5.2.1",
+    "uuid": "^13.0.0"
+  }
+}

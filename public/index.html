@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Secret Folders</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: Arial, sans-serif; max-width:800px; margin:20px auto; padding:10px; }
+    input, textarea { width:100%; padding:8px; margin:6px 0; box-sizing:border-box; }
+    button { padding:8px 12px; margin-right:8px; }
+    .message { border:1px solid #ddd; padding:8px; margin:8px 0; border-radius:6px; }
+    .small { font-size:0.9em; color:#555; }
+  </style>
+</head>
+<body>
+  <h1>Secret Message Folders (very simple)</h1>
+  <section>
+    <h2>Create folder</h2>
+    <input id="createName" placeholder="Folder name (optional)" />
+    <input id="createPassword" placeholder="Password (remember this)" />
+    <label>Expire in years: <input id="createYears" value="5" style="width:60px" /></label>
+    <button id="createBtn">Create Folder</button>
+    <div id="createResult" class="small"></div>
+  </section>
+
+  <hr />
+
+  <section>
+    <h2>Open folder</h2>
+    <input id="folderId" placeholder="Folder ID" />
+    <input id="folderPassword" placeholder="Password" />
+    <button id="openBtn">Open</button>
+    <div id="folderInfo" class="small"></div>
+
+    <div id="folderArea" style="display:none;">
+      <h3>Messages</h3>
+      <div>
+        <textarea id="newMessage" placeholder="Write a secret message"></textarea>
+        <button id="addMsgBtn">Add message</button>
+      </div>
+      <div id="messagesList"></div>
+      <div id="shareSection" style="display:none; margin-top:12px;">
+  <h4>Create share link</h4>
+  <label>Expire in years: <input id="shareYears" value="5" style="width:60px" /></label>
+  <button id="createShareBtn">Create share link</button>
+  <div id="shareResult" class="small"></div>
+</div>
+
+    </div>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
